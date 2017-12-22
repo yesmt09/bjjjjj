@@ -1,4 +1,5 @@
 <?php
+namespace Bjjjj;
 
 class helper
 {
@@ -39,10 +40,16 @@ class helper
         return array($status_code, $result);
     }
 
-    public function curl_post( $data, $url, $referer = null)
+    public function curl_post( $data, $url, $referer = null, array $opt = array(), $skip = false)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->hosts . $url);
+        if($skip == true) {
+            echo $url;
+            echo $data;
+            curl_setopt($ch, CURLOPT_URL, $url);
+        } else {
+            curl_setopt($ch, CURLOPT_URL, $this->hosts . $url);
+        }
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // https请求 不验证证书和hosts
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->header);
@@ -50,6 +57,9 @@ class helper
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
+        foreach ($opt as $k=>$v) {
+            curl_setopt($ch, $k, $v);
+        }
         if ($referer != null) {
             curl_setopt($ch, CURLOPT_REFERER, $this->hosts . $referer);
         }

@@ -1,4 +1,9 @@
 {
+    "autoload": {
+        "psr-4": {
+            "Bjjjj\\": ""
+        }
+    },
     "require": {
         "sunra/php-simple-html-dom-parser": "^1.5"
     }
