@@ -13,15 +13,15 @@ class helper
         $this->domain = 'enterbj.zhongchebaolian.com';
         $this->header = [
             'Host: ' . $this->domain,
-            'Accept: application/json, text/javascript, */*; q=0.01',
+            'Accept: */*',
             'X-Requested-With: XMLHttpRequest',
             'Accept-Encoding: gzip, deflate',
-            'Accept-Language: zh-cn',
+            'Accept-Language: zh-CN,en-US;q=0.8',
             'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
             'Origin: ' . $this->hosts,
             'Connection: keep-alive',
             'User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; vivo Xplay3S Build/KVT49L) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36',
-            'Cookie:JSESSIONID=2DC6D07B3F9894CADE2483B94A8AF543;CNZZDATA1260761932=1576525013-1503353120-https%253A%252F%252Fenterbj.zhongchebaolian.com%252F%7C1512521350; UM_distinctid=15dfeacbf2a32a-0b6188833cb4d98-2c590766-4a640-15dfeacbf2b722'
+            'Cookie: JSESSIONID=D5A1D688EA23F70E86DA1E94875C65CC; UM_distinctid=16057e6bec981-09139ef21-3064d5f-38400-16057e6becb1d; CNZZDATA1260761932=1446634612-1513302424-%7C1526445942'
         ];
     }
 

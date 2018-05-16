@@ -7,25 +7,44 @@ foreach ( $users as $userid=>$carInfo) {
         $bjjj = new \Bjjjj\Bjjj($userid);
         $cards = $bjjj->getCardList();
         foreach ( $cards as $car) {
-            $bjjj->setCarInfo($carInfo[$car['licenseno']], $car);
+            $need = true;
             if(!empty($car['carapplyarr'])) {
                 foreach ($car['carapplyarr'] as $info) {
+            		$bjjj->setCarInfo($carInfo[$car['licenseno']], $info);
                     if ($info['status'] != 1 || !$bjjj->checkCardTime($info)) {
+                        $inBjjjj = $info['enterbjend'];
                     } else {
+                        $need = false;
                         $message = ' 无需申请进京证';
                         break;
                     }
                 }
+            } else {
+                $inBjjjj = date('Y-m-d');
             }
-            $message = '需要申请进京证';
-            $bjjj->getCarType();
-            $i = 1;
-            $bjjj->submitPaper();
+            if($need) {
+                $message = '需要申请进京证';
+                $bjjj->getCarType();
+                $i = 1;
+                while (true) {
+                    try {
+                        $bjjj->checkService();
+                        $bjjj->submitPaper($inBjjjj);
+                        break;
+                    } catch (Exception $e) {
+                        echo $e->getMessage() . " 继续检测" .PHP_EOL;
+                        sleep(mt_rand(20,100));
+                        if($i == 100) {
+                            break;
+                        }
+                    }
+                }
+            }
             $bjjj->pushMessage($message);
         }
     } catch (Exception $e) {
         $message =  $e->getMessage() . " the end!!!!";
-        $bjjj->pushMessage($message);
+        echo $message;
     }
 }
 foreach ($bjjj->message as $k=>$v) {

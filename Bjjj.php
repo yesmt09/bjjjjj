@@ -112,15 +112,28 @@ class Bjjj
         }
     }
 
-    public function submitPaper (){
-        var_dump($this->enter->submitPaper(date('Y-m-d'),$this->carInfo, $this->carmodel, $this->carregtime));
+    public function submitPaper ($applyTime){
+        $result = $this->enter->submitPaper( date('Y-m-d',strtotime($applyTime)+86400),$this->carInfo, $this->carmodel, $this->carregtime);
+        if($result[0] == 200) {
+            $code = json_decode($result[1],true);
+            if ($code['rescode'] == 200) {
+                $this->pushMessage('申请成功');
+                unlink('./config/cache/' . $this->userId);
+                return true;
+            } else {
+                $this->pushMessage($code['resdes']);
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     public function checkCardTime(array $cardInfo) {
         if(empty($cardInfo)){
             return true;
         } else {
-            if ((time() - strtotime($cardInfo['enterbjend']))>1) {
+            if ((time() - strtotime($cardInfo['enterbjend']))>=0) {
                 return true;
             }
             return false;

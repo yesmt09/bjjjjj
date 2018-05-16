@@ -3,16 +3,16 @@ namespace Bjjjj;
 
 class Enter
 {
-    private $appkey = '';
-    private $deviceid = '';
-    private $platform = '';
+    private $appkey = 'kkk';
+    private $deviceid = 'ddd';
+    private $platform = '02';
     private $appsource = '';
-    private $imei = '';
-    private $imsi = '';
-    private $gpslat = '';
-    private $gpslon = '';
-    private $cartypecode = '';
-    private $vehicletype = '';
+    private $imei = '205bb2ce-ea10-3503-bbfa-f7a66aebdcce';
+    private $imsi = '460021200248431';
+    private $gpslat = '39.982963';
+    private $gpslon = '116.357566';
+    private $cartypecode = '02';
+    private $vehicletype = '03';
     // 获取车辆进京证状态
     private $page_entercarlist = '/enterbj/platform/enterbj/entercarlist';
     private $page_index = '/enterbj/jsp/enterbj/index.html';
@@ -31,7 +31,7 @@ class Enter
     public function __construct($userid)
     {
         $this->userid = $userid;
-        $this->token = $this->getToken();
+        $this->token = strtoupper($this->getToken());
     }
 
     public function setEnterCar ($car)
@@ -69,7 +69,6 @@ class Enter
             'sign'=>$sign,
             'platform'=>$this->platform,
             'appsource'=> $this->appsource,
-            'vehicletype' => 03,
         );
         $helper = new helper();
         return $helper->curl_post(http_build_query($form), $this->page_entercarlist, $this->page_index);
@@ -135,9 +134,9 @@ class Enter
         $driverphoto = $cardInfo['jia'];
         $personphoto = $cardInfo['shen'];
         //进京的区
-        $inbjentrancecode1 = '';
+        $inbjentrancecode1 = '09';
         //进京的高速
-        $inbjentrancecode = '';
+        $inbjentrancecode = '03';
         $inbjduration = '7';
 
         $logid = time();
@@ -165,7 +164,7 @@ class Enter
             'inbjduration'=>$inbjduration,
             'inbjtime'=>$inBjTime,
             'appkey'=>'',
-            'deviceid'=>'',
+            'deviceid'=>'a4e7c23f420e4b1fbd3dec41d0cb6f2557d4e79d',
             'token'=>'',
             'timestamp'=> $result['timestamp'],
             'userid'=>$this->userid,
@@ -192,6 +191,7 @@ class Enter
             'code'=> '',
             'sign' => $result['sign'],
             'platform' => $this->platform,
+            'applystatus' => '',
         );
 
         $header = [

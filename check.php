@@ -9,7 +9,7 @@ $tip = false;
 while(true) {
     // form提交
     $form = array(
-        'userid'=>'',
+        'userid'=>'4ED87357128F4016B0F402EB479169A0',
     );
     $helper = new \Bjjjj\helper();
     $result = $helper->curl_post(http_build_query($form), '/enterbj/platform/enterbj/curtime_03', '/enterbj/platform/enterbj/toVehicleType');
@@ -26,7 +26,7 @@ while(true) {
     } else {
 	$tip = true;
 	$i++;
-	if($i==5){
+	if($i==7){
 		$i = 1;
 	}
         $message = '☑️可以办理进京证了!!!  ';
@@ -38,6 +38,19 @@ while(true) {
 };
 
 function setTip ($message){
+        /*$webHook = 'https://oapi.dingtalk.com/robot/send?access_token=6d64be75402dbee628defc846aa22163449f6caf60a252ff41b71871075b2080';
+        request_by_curl($webHook, json_encode([
+            'msgtype' => 'text',
+            'text' => [
+                'content' => $message
+            ],
+            "at" => [
+		"atMobiles" => [
+		]
+                //"isAtAll" => true
+            ]
+        ]));
+*/
 }
 
 function request_by_curl($remote_server, $post_string) {  
