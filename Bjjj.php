@@ -133,7 +133,7 @@ class Bjjj
         if(empty($cardInfo)){
             return true;
         } else {
-            if ((time() - strtotime($cardInfo['enterbjend']))>=0) {
+            if ((time() - strtotime($cardInfo['enterbjend']))<=0) {
                 return true;
             }
             return false;
